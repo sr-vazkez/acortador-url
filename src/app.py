@@ -18,6 +18,16 @@ app.config['MYSQL_DATABASE'] = 'db_enlaces_cortos'
 #Inicializando BD
 mysql = MySQL(app)
 
+#rutas
+@app.route('/', methods = ['GET'])
+def inicio():
+     try:
+          return jsonify(respuesta = 'inicio')
+     except:
+          return jsonify(respuesta = 'Error de peticion'), 500
+     
+
+
 #Ejecutar app
 if __name__ == "__main__":
      app.run(port=80, debug=True)
