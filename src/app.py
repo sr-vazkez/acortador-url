@@ -59,4 +59,3 @@ def crear_enlace_corto():
 # Ejecutar app
 if __name__ == "__main__":
     app.run(port=5500, debug=True)
-    print(mysql)
