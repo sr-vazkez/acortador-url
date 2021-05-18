@@ -9,6 +9,15 @@ app = Flask(__name__)
 #endpoint
 endpoint = 'http://short.url'
 
+#conexion a Mysql
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE'] = 'db_enlaces_cortos'
+
+#Inicializando BD
+mysql = MySQL(app)
+
 #Ejecutar app
 if __name__ == "__main__":
      app.run(port=80, debug=True)
