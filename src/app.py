@@ -7,3 +7,5 @@ import shourtuuid
 app = Flask(__name__)
 
 #endpoint
+endpoint = 'http://short.url'
+
