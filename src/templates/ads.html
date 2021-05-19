@@ -1,0 +1,15 @@
+<div class="d-flex flex-column justify-content-center">
+     <h1 id="contador" class="text-center fs-1 fw-bold">5</h1>
+     <img src="src/static/img/" alt="publicidad" style="border-radius: 100px;">
+</div>
+<script>
+     function redirect(){
+          const contador = document.getElementById("contador");
+          let valor = 5;
+          setInterval( () =>{
+               if (valor > 0){
+                    contador.innerHTML = valor -= 1;
+               }
+          }, 1000)
+     }
+</script>
