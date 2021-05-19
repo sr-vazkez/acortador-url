@@ -20,6 +20,8 @@ mysql = MySQL(app)
 
 # rutas
 
+# Ruta inicial
+
 
 @app.route('/', methods=['GET'])
 def inicio():
@@ -28,6 +30,8 @@ def inicio():
     except:
         return jsonify(respuesta='Error de peticion'), 500
 
+# Ruta para crear enlace corto
+
 
 @app.route('/crear_enlace_corto', methods=['POST'])
 def crear_enlace_corto():
@@ -35,23 +39,24 @@ def crear_enlace_corto():
         if request.method == 'POST':
             # capturando la url
             url = request.form['url']
+
             # cursor
             cursor = mysql.connection.cursor()
 
+            # generando enlace corto
             enlace_corto = shortuuid.ShortUUID().random(length=7)
 
             # Ingresamos en la base de datos  la url enviada
             cursor.execute(
-                "INSERT INTO enlaces (irl, enlaces_cortos)VALUES (%s, %s)", (url, enlace_corto))
+                "INSERT INTO enlaces (url, enlace_corto)VALUES (%s, %s)", (url, enlace_corto))
 
             # Guardae cambios en la base de datos
             mysql.connection.commit()
 
             # Cerrar conexion
             cursor.close()
-            nuevo_enlace = endpoint + '/'+enlace_corto
-
-        return jsonify(respuesta='inicio')
+            nuevo_enlace = endpoint + '/' + enlace_corto
+            return jsonify(respuesta=nuevo_enlace)
     except:
         return jsonify(respuesta='Error de peticion'), 500
 
