@@ -53,6 +53,13 @@ def crear_enlace_corto():
 
                 if not cursor.fetchone():
                     break
+            # Consultamos si en la base de datos existe la URL
+            cursor.execute(
+                "SELECT enlace_coro FROM enlaces WHERE URL = BINARY %s", (url,))
+            data = cursor.fetchone()
+            if data:
+                nuevo_enlace = endpoint + '/'+data[0]
+                return jsonify(respuesta=nuevo_enlace)
 
             # Ingresamos en la base de datos  la url enviada
             cursor.execute(
