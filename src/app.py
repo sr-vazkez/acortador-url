@@ -75,6 +75,27 @@ def crear_enlace_corto():
     except:
         return jsonify(respuesta='Error de peticion'), 500
 
+# Ruta para ir a URL de base de datos
+
+
+@app.route('/<id>')
+def obtener_url(id):
+    try:
+        cursor = mysql.connection.cursor()
+
+        # buscamos en la bd la direccion url
+        cursor.execute(
+            "SELECT url FROM enlaces WHERE enlace_corto = BINARY %s", (id,))
+
+        # Guardar en variable el resultado
+        data = cursor.fetchone()
+
+        # cerrar conexion de la base de datos
+        cursor.close()
+        return jsonify(respuesta=data[0]), 200
+    except:
+        pass
+
 
 # Ejecutar app
 if __name__ == "__main__":
