@@ -43,8 +43,16 @@ def crear_enlace_corto():
             # cursor
             cursor = mysql.connection.cursor()
 
-            # generando enlace corto
-            enlace_corto = shortuuid.ShortUUID().random(length=7)
+            # Ciclo para valdar enlace corto y no se duplique
+            while True:
+                # generando enlace corto
+                enlace_corto = shortuuid.ShortUUID().random(length=7)
+                # Consultamos a la base de datos si existe el enlace
+                cursor.execute(
+                    "SELECT * FROM ENLACES WHERE ENLACE_CORTO = BINARY %s", (enlace_corto))
+
+                if not cursor.fetchone():
+                    break
 
             # Ingresamos en la base de datos  la url enviada
             cursor.execute(
