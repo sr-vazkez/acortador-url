@@ -50,6 +50,10 @@
                const btnCopiar = document.getElementById("btnCopiar");
                btnCopiar.innerHTML = "Link copiado";
                btnCopiar.classList.replace("btn-outline-success", "btn-success")
+
+               setTimeout(()=>{
+                    location.replace("{{ url_for('inicio') }}")
+               }, 3000)
           }
      </script>
 {% endblock %}
