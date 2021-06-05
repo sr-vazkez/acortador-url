@@ -1,5 +1,6 @@
 # Importando librerias
 from flask import Flask, render_template, url_for, request, redirect, jsonify
+from flask.helpers import flash
 from flask.templating import render_template_string
 from flask_mysql_connector import MySQL
 import shortuuid
@@ -18,6 +19,10 @@ app.config['MYSQL_DATABASE'] = 'db_enlaces_cortos'
 
 # Inicializando BD
 mysql = MySQL(app)
+
+
+# Llave secreta para usar mensajes flash
+app.secret_key = ""
 
 # rutas
 
@@ -59,8 +64,8 @@ def crear_enlace_corto():
                 "SELECT enlace_coro FROM enlaces WHERE URL = BINARY %s", (url,))
             data = cursor.fetchone()
             if data:
-                nuevo_enlace = endpoint + '/'+data[0]
-                return jsonify(respuesta=nuevo_enlace)
+                flash(endpoint + '/' + data[0])
+                return redirect(url_for('inicio')), 302
 
             # Ingresamos en la base de datos  la url enviada
             cursor.execute(
@@ -72,9 +77,10 @@ def crear_enlace_corto():
             # Cerrar conexion
             cursor.close()
             nuevo_enlace = endpoint + '/' + enlace_corto
-            return jsonify(respuesta=nuevo_enlace)
+            flash(nuevo_enlace)
+            return redirect(url_for('inicio')), 302
     except:
-        return jsonify(respuesta='Error de peticion'), 500
+        return render_template('404.html'), 404
 
 # Ruta para ir a URL de base de datos
 
