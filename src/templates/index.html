@@ -3,36 +3,43 @@
           <div class="d-flex justify-content-center">
             <img src="/static/img/" alt="Banner" srcset="" style="width: 60%;">
           </div>
-          <form action="" method="POST">
-            <div class="input-group mb-3">
-                 <span class="input-group-text" id="basic-addon3" style="border-radius: 10px;">
-                      Ingresa tu Link
-                 </span>
-                 <input type="text"
-                 class="form-control ms-2"
-                 style="border-radius: 10px;"
-                 pattern="https?:\/\/(www\.)?[-a-ZA-Z0-9@:%._\+~#+]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$"
-                 title="Link no valido"
-                 name='Inserta tu Link'
-                 required/>
-                 <button class="btn btn-primary" style ="border-radius: 10px">Cortar Link</button>
+          <div class=" card card-body p-5 mt-5" style="border-radius: 20px;">
+               {% with nueva_url = get_flashed_messages() %}
+               {%if not nueva_url %}
+               <form action="" method="POST">
+               <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3" style="border-radius: 10px;">
+                         Ingresa tu Link
+                    </span>
+                    <input type="text"
+                    class="form-control ms-2"
+                    style="border-radius: 10px;"
+                    pattern="https?:\/\/(www\.)?[-a-ZA-Z0-9@:%._\+~#+]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$"
+                    title="Link no valido"
+                    name='Inserta tu Link'
+                    required/>
+                    <button class="btn btn-primary" style ="border-radius: 10px">Cortar Link</button>
 
-            </div>
-          </form>
-          <div class="input-group mb-3">
-               <input id="nuevaURL"
-               type="text"
-               class="form-control ms-2"
-               style="border-radius:10px"
-               value="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                />
-            <button id="btnCopiar"
-            onclick="copiarURL()"
-            type="button"
-            class="btn btn-outline-success ms-2"
-            style="border-radius: 10px;">Copiar Link</button>
+               </div>
+               </form>
+               {% else %}
+               <div class="input-group mb-3">
+                    <input id="nuevaURL"
+                    type="text"
+                    class="form-control ms-2"
+                    style="border-radius:10px"
+                    value="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                    />
+               <button id="btnCopiar"
+               onclick="copiarURL()"
+               type="button"
+               class="btn btn-outline-success ms-2"
+               style="border-radius: 10px;">Copiar Link</button>
+               </div>
+               {% endif %}
+               {% endwith % }
+               </div>
           </div>
-     </div>
      <script>
           function copiarURL(){
                const nuevaURL = document.getElementById("nuevaURL");
