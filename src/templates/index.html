@@ -6,7 +6,7 @@
           <div class=" card card-body p-5 mt-5" style="border-radius: 20px;">
                {% with nueva_url = get_flashed_messages() %}
                {%if not nueva_url %}
-               <form action="" method="POST">
+               <form action="{{ url_for('crear_enlace_corto')}}" method="POST">
                <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3" style="border-radius: 10px;">
                          Ingresa tu Link
@@ -28,7 +28,7 @@
                     type="text"
                     class="form-control ms-2"
                     style="border-radius:10px"
-                    value="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                    value="{{ nueva_url[0] }}"
                     />
                <button id="btnCopiar"
                onclick="copiarURL()"
