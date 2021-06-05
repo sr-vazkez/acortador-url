@@ -99,9 +99,9 @@ def obtener_url(id):
 
         # cerrar conexion de la base de datos
         cursor.close()
-        return jsonify(respuesta=data[0]), 200
+        return render_template('ads.html', url=data[0]), 200
     except:
-        pass
+        return render_template('404.html'), 404
 
 
 # Ejecutar app
