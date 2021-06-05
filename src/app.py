@@ -1,5 +1,6 @@
 # Importando librerias
 from flask import Flask, render_template, url_for, request, redirect, jsonify
+from flask.templating import render_template_string
 from flask_mysql_connector import MySQL
 import shortuuid
 
@@ -26,9 +27,9 @@ mysql = MySQL(app)
 @app.route('/', methods=['GET'])
 def inicio():
     try:
-        return jsonify(respuesta='inicio')
+        return render_template_string('index.html'), 200
     except:
-        return jsonify(respuesta='Error de peticion'), 500
+        return render_template('404.html'), 404
 
 # Ruta para crear enlace corto
 
